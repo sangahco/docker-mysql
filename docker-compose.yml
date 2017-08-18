@@ -11,7 +11,7 @@ services:
     volumes:
     - ${MYSQL_DATA}:/var/lib/mysql
     networks:
-      default:
+      kakao-net:
         aliases: [db, mysql]
     extends:
       service: logging
@@ -21,6 +21,8 @@ services:
     image: phpmyadmin/phpmyadmin
     ports:
     - 8084:80
+    networks:
+      kakao-net:
     extends:
       service: logging
     restart: "unless-stopped"
@@ -31,3 +33,7 @@ services:
       options:
         max-size: "10m"
         max-file: "5"
+
+  networks: 
+    kakao-net:
+      external: true
