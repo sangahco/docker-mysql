@@ -4,6 +4,9 @@ services:
   
   mysql:
     image: mysql:5.5
+    extends:
+      file: common-services.yml
+      service: logging
     environment:
     - MYSQL_ROOT_PASSWORD=secret
     ports:
@@ -13,27 +16,20 @@ services:
     networks:
       kakao-net:
         aliases: [db, mysql]
-    extends:
-      service: logging
     restart: "unless-stopped"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    extends:
+      file: common-services.yml
+      service: logging
     ports:
     - 8084:80
     networks:
       kakao-net:
-    extends:
-      service: logging
+      
     restart: "unless-stopped"
 
-  logging:
-    logging: 
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "5"
-
-  networks: 
-    kakao-net:
-      external: true
+networks: 
+  kakao-net:
+    external: true
