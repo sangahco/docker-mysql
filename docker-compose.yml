@@ -10,7 +10,7 @@ services:
     environment:
     - MYSQL_ROOT_PASSWORD=secret
     ports:
-    - 0.0.0.0:3306:3306
+    - 3306:3306
     volumes:
     - ${MYSQL_DATA}:/var/lib/mysql
     networks:
@@ -27,8 +27,15 @@ services:
     - 8084:80
     networks:
       kakao-net:
-      
     restart: "unless-stopped"
+
+  msd:
+    image: ${REGISTRY_URL}/mysqldumper
+    networks:
+      kakao-net:
+    ports:
+    - 8085:80
+    restart: "unless-stopper"
 
 networks: 
   kakao-net:
