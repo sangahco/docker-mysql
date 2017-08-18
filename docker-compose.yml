@@ -35,7 +35,7 @@ services:
       kakao-net:
     ports:
     - 8085:80
-    restart: "unless-stopper"
+    restart: "unless-stopped"
 
 networks: 
   kakao-net:
