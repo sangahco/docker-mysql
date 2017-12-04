@@ -10,11 +10,11 @@ services:
     environment:
     - MYSQL_ROOT_PASSWORD=secret
     ports:
-    - 3306:3306
+    - ${MYSQL_PORT}:3306
     volumes:
     - ${MYSQL_DATA}:/var/lib/mysql
     networks:
-      kakao-net:
+      mysql-net:
         aliases: [db, mysql]
     restart: "unless-stopped"
 
@@ -24,19 +24,19 @@ services:
       file: common-services.yml
       service: logging
     ports:
-    - 8084:80
+    - ${PHPMYADMIN_PORT}:80
     networks:
-      kakao-net:
+      mysql-net:
     restart: "unless-stopped"
 
   msd:
     image: ${REGISTRY_URL}/mysqldumper
     networks:
-      kakao-net:
+      mysql-net:
     ports:
-    - 8085:80
+    - ${MYSQLDUMPER_PORT}:80
     restart: "unless-stopped"
 
 networks: 
-  kakao-net:
+  mysql-net:
     external: true
