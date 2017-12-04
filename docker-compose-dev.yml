@@ -1,0 +1,42 @@
+version: "2"
+
+services:
+  
+  mysql:
+    image: mysql:5.5
+    extends:
+      file: common-services.yml
+      service: logging
+    environment:
+    - MYSQL_ROOT_PASSWORD=secret
+    ports:
+    - ${MYSQL_PORT}:3306
+    volumes:
+    - ${MYSQL_DATA}:/var/lib/mysql
+    networks:
+      mysql-net:
+        aliases: [db, mysql]
+    restart: "unless-stopped"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    extends:
+      file: common-services.yml
+      service: logging
+    ports:
+    - ${PHPMYADMIN_PORT}:80
+    networks:
+      mysql-net:
+    restart: "unless-stopped"
+
+  msd:
+    build: msd
+    networks:
+      mysql-net:
+    ports:
+    - ${MYSQLDUMPER_PORT}:80
+    restart: "unless-stopped"
+
+networks: 
+  mysql-net:
+    external: true
