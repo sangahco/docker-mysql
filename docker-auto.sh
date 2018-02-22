@@ -63,6 +63,10 @@ fi
 
 for i in "$@"; do
     case $i in
+        --dev)
+            CONF_ARG="-f docker-compose-dev.yml"
+            shift
+            ;;
         --help|-h)
             usage
             exit 1
@@ -106,6 +110,7 @@ elif [ "$1" == "dump" ]; then
     docker-compose $CONF_ARG pull
     docker-compose $CONF_ARG build --pull
     docker-compose $CONF_ARG up -d --remove-orphans
+    exit 0
 
 fi
 
