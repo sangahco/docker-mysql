@@ -99,6 +99,13 @@ elif [ "$1" == "logs" ]; then
     docker-compose $CONF_ARG logs -f --tail 200 "$@"
     exit 0
 
+elif [ "$1" == "dump" ]; then
+    shift
+    CONF_ARG="$CONF_ARG -f docker-compose-dump.yml"
+    docker-compose $CONF_ARG pull
+    docker-compose $CONF_ARG build --pull
+    docker-compose $CONF_ARG up -d --remove-orphans
+
 fi
 
 docker-compose $CONF_ARG "$@"
