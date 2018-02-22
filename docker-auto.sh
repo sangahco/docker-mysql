@@ -48,6 +48,7 @@ echo
 echo "Commands:"
 echo "  up              Start the services"
 echo "  down            Stop the services"
+echo "  dump            Create a DB dump file"
 echo "  ps              Show the status of the services"
 echo "  logs            Follow the logs on console"
 echo "  login           Log in to a Docker registry"

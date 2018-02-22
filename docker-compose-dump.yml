@@ -11,5 +11,9 @@ services:
     depends_on: 
       - mysql
     networks:
-      kakao-net:
+      mysql-net:
     command: mysqldump --lock-tables --host mysql --result-file /tmp/dbdump/${MYSQL_DUMP_FILE} -p${MYSQL_ROOT_PASSWORD} --all-databases
+
+networks: 
+  mysql-net:
+    external: true
