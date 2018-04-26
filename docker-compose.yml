@@ -12,6 +12,7 @@ services:
     ports:
     - ${MYSQL_PORT}:3306
     volumes:
+    - ./mysql:/etc/mysql/conf.d:ro
     - ${MYSQL_DATA}:/var/lib/mysql
     networks:
       mysql-net:
