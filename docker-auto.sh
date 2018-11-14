@@ -72,6 +72,10 @@ for i in "$@"; do
             CONF_ARG="-p phpmyadmin -f docker-compose-phpmyadmin.yml"
             shift
             ;;
+        --mysql-dump)
+            CONF_ARG="$CONF_ARG -f docker-compose-dump.yml"
+            shift
+            ;;
         --help|-h)
             usage
             exit 1
