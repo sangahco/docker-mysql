@@ -41,6 +41,7 @@ echo
 echo "Mode:"
 echo "  --prod          Production mode"
 echo "  --dev           Development mode"
+echo "  --phpmyadmin    phpmyadmin service mode"
 echo
 echo "Options:"
 echo "  --help            Show this help message"
@@ -65,6 +66,10 @@ for i in "$@"; do
     case $i in
         --dev)
             CONF_ARG="-f docker-compose-dev.yml"
+            shift
+            ;;
+        --phpmyadmin)
+            CONF_ARG="-p phpmyadmin -f docker-compose-phpmyadmin.yml"
             shift
             ;;
         --help|-h)
