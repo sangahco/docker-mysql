@@ -42,6 +42,7 @@ echo "Mode:"
 echo "  --prod          Production mode"
 echo "  --dev           Development mode"
 echo "  --phpmyadmin    phpmyadmin service mode"
+echo "  --mysql-dump    mysqldump service mode"
 echo
 echo "Options:"
 echo "  --help            Show this help message"
