@@ -1,12 +1,9 @@
-version: "2"
+version: "3"
 
 services:
   
   mysql:
     image: mysql:5.5
-    extends:
-      file: common-services.yml
-      service: logging
     environment:
     - MYSQL_ROOT_PASSWORD=secret
     ports:
@@ -17,26 +14,20 @@ services:
     networks:
       mysql-net:
         aliases: [db, mysql]
+    logging: 
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
     restart: "unless-stopped"
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    extends:
-      file: common-services.yml
-      service: logging
-    ports:
-    - ${PHPMYADMIN_PORT}:80
-    networks:
-      mysql-net:
-    restart: "unless-stopped"
-
-  msd:
-    image: ${REGISTRY_URL}/mysqldumper
-    networks:
-      mysql-net:
-    ports:
-    - ${MYSQLDUMPER_PORT}:80
-    restart: "unless-stopped"
+  # msd:
+  #   image: ${REGISTRY_URL}/mysqldumper
+  #   networks:
+  #     mysql-net:
+  #   ports:
+  #   - ${MYSQLDUMPER_PORT}:80
+  #   restart: "unless-stopped"
 
 networks: 
   mysql-net:

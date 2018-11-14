@@ -1,12 +1,9 @@
-version: "2"
+version: "3"
 
 services:
   
   mysql:
     image: mysql:5.5
-    extends:
-      file: common-services.yml
-      service: logging
     environment:
     - MYSQL_ROOT_PASSWORD=secret
     ports:
@@ -16,17 +13,6 @@ services:
     networks:
       mysql-net:
         aliases: [db, mysql]
-    restart: "unless-stopped"
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    extends:
-      file: common-services.yml
-      service: logging
-    ports:
-    - ${PHPMYADMIN_PORT}:80
-    networks:
-      mysql-net:
     restart: "unless-stopped"
 
   msd:
